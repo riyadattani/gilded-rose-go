@@ -12,7 +12,12 @@ func Test_Foo(t *testing.T) {
 		&Item{"bar", 2, 1},
 	}
 
-	UpdateQuality(items)
+	approvals.VerifyAll(t, "update quality", items, func(item interface{}) string {
+		i := item.(*Item)
+		items := Items{i}
+		UpdateQuality(items)
+		return items.String()
+	})
 
-	approvals.VerifyString(t, items.String())
+	//approvals.VerifyString(t, items.String())
 }
