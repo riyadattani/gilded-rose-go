@@ -7,17 +7,14 @@ import (
 )
 
 func Test_Foo(t *testing.T) {
-	var items = Items{
-		&Item{"foo", 0, 0},
-		&Item{"bar", 2, 1},
-	}
+	names := []string{"Aged Brie", "Backstage passes to a TAFKAL80ETC concert"}
+	sellins := []int{0, 1}
+	quality := []int{0, 1}
 
-	approvals.VerifyAll(t, "update quality", items, func(item interface{}) string {
-		i := item.(*Item)
-		items := Items{i}
+	approvals.VerifyAllCombinationsFor3(t, "update quality", func(name, sellin, quality interface{}) string {
+		item := &Item{name.(string), sellin.(int), quality.(int)}
+		items := Items{item}
 		UpdateQuality(items)
 		return items.String()
-	})
-
-	//approvals.VerifyString(t, items.String())
+	}, names, sellins, quality)
 }
