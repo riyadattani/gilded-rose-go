@@ -1,15 +1,18 @@
 package main
 
-import "testing"
+import (
+	"testing"
+
+	approvals "github.com/approvals/go-approval-tests"
+)
 
 func Test_Foo(t *testing.T) {
-	var items = []*Item{
+	var items = Items{
 		&Item{"foo", 0, 0},
+		&Item{"bar", 2, 1},
 	}
 
 	UpdateQuality(items)
 
-	if items[0].name != "fixme" {
-		t.Errorf("Name: Expected %s but got %s ", "fixme", items[0].name)
-	}
+	approvals.VerifyString(t, items.String())
 }

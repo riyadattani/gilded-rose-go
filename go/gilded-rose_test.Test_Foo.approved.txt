@@ -1,0 +1,2 @@
+&main.Item{name:"foo", sellIn:-1, quality:0}
+&main.Item{name:"bar", sellIn:1, quality:0}
