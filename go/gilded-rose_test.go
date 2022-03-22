@@ -7,7 +7,7 @@ import (
 )
 
 func Test_Foo(t *testing.T) {
-	names := []string{"Aged Brie", "Backstage passes to a TAFKAL80ETC concert", "Sulfuras, Hand of Ragnaros"}
+	names := []string{"Aged Brie", "Backstage passes to a TAFKAL80ETC concert", "Sulfuras, Hand of Ragnaros", "Conjured"}
 	sellins := []int{0, 1, 10, 11, 5, 6, -1}
 	quality := []int{0, 1, 49, 50, -1}
 
