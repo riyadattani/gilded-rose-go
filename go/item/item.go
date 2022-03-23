@@ -11,6 +11,10 @@ func NewItem(name string, sellIn int, quality int) *Item {
 	return &Item{Name: name, SellIn: sellIn, Quality: quality}
 }
 
+func (i Item) GetQuality() int {
+	return i.Quality
+}
+
 type Items []*Item
 
 func (i Items) String() string {
