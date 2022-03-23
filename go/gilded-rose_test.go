@@ -14,7 +14,7 @@ func Test_Foo(t *testing.T) {
 
 	approvals.VerifyAllCombinationsFor3(t, "update quality", func(name, sellin, quality interface{}) string {
 		it := item.NewItem(name.(string), sellin.(int), quality.(int))
-		items := item.Items{it}
+		items := GildedRoseItems{it}
 
 		rose := NewGildedRose(items)
 		rose.UpdateQuality()

@@ -1,11 +1,22 @@
 package main
 
 import (
-	"github.com/riyadattani/item"
+	"fmt"
 )
 
+type GildedRoseItem interface {
+	GetQuality() int
+	GetSellIn() int
+	GetName() string
+
+	ZeroQuality()
+	IncrementQuality()
+	DecrementQuality()
+	DecrementSellIn()
+}
+
 type GildedRose struct {
-	items item.Items
+	items GildedRoseItems
 }
 
 const (
@@ -14,7 +25,7 @@ const (
 	Sulfuras        = "Sulfuras, Hand of Ragnaros"
 )
 
-func NewGildedRose(items item.Items) *GildedRose {
+func NewGildedRose(items GildedRoseItems) *GildedRose {
 	return &GildedRose{items: items}
 }
 
@@ -25,7 +36,7 @@ func (g GildedRose) UpdateQuality() {
 	}
 }
 
-func (g GildedRose) doUpdateQuality(item *item.Item) {
+func (g GildedRose) doUpdateQuality(item GildedRoseItem) {
 	switch item.GetName() {
 	case AgedBrie:
 		if item.GetQuality() < 50 {
@@ -73,5 +84,15 @@ func (g GildedRose) doUpdateQuality(item *item.Item) {
 			}
 		}
 	}
+}
 
+type GildedRoseItems []GildedRoseItem
+
+func (g GildedRoseItems) String() string {
+	var s string
+	for _, item := range g {
+		s += fmt.Sprintf("%#v\n", item)
+	}
+
+	return s
 }
