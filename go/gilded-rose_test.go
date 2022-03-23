@@ -12,9 +12,11 @@ func Test_Foo(t *testing.T) {
 	quality := []int{0, 1, 49, 50, -1}
 
 	approvals.VerifyAllCombinationsFor3(t, "update quality", func(name, sellin, quality interface{}) string {
-		item := &Item{name.(string), sellin.(int), quality.(int)}
-		items := Items{item}
-		UpdateQuality(items)
+		items := Items{&Item{name.(string), sellin.(int), quality.(int)}}
+
+		rose := NewGildedRose(items)
+		rose.UpdateQuality()
+
 		return items.String()
 	}, names, sellins, quality)
 }

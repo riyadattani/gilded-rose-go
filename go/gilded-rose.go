@@ -1,19 +1,27 @@
 package main
 
+type GildedRose struct {
+	items Items
+}
+
 const (
 	AgedBrie        = "Aged Brie"
 	BackstagePasses = "Backstage passes to a TAFKAL80ETC concert"
 	Sulfuras        = "Sulfuras, Hand of Ragnaros"
 )
 
-func UpdateQuality(items []*Item) {
-	for _, item := range items {
-		doUpdateQuality(item)
+func NewGildedRose(items Items) *GildedRose {
+	return &GildedRose{items: items}
+}
+
+func (g GildedRose) UpdateQuality() {
+	for _, item := range g.items {
+		g.doUpdateQuality(item)
 
 	}
 }
 
-func doUpdateQuality(item *Item) {
+func (g GildedRose) doUpdateQuality(item *Item) {
 	switch item.name {
 	case AgedBrie:
 		if item.quality < 50 {
@@ -61,4 +69,5 @@ func doUpdateQuality(item *Item) {
 			}
 		}
 	}
+
 }
