@@ -4,11 +4,11 @@ import "fmt"
 
 type Item struct {
 	Name            string
-	SellIn, quality int
+	sellIn, quality int
 }
 
 func NewItem(name string, sellIn int, quality int) *Item {
-	return &Item{Name: name, SellIn: sellIn, quality: quality}
+	return &Item{Name: name, sellIn: sellIn, quality: quality}
 }
 
 func (i *Item) GetQuality() int {
@@ -25,6 +25,14 @@ func (i *Item) DecrementQuality() {
 
 func (i *Item) ZeroQuality() {
 	i.quality = 0
+}
+
+func (i *Item) DecrementSellIn() {
+	i.sellIn--
+}
+
+func (i *Item) GetSellIn() int {
+	return i.sellIn
 }
 
 type Items []*Item

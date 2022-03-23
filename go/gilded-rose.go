@@ -31,9 +31,9 @@ func (g GildedRose) doUpdateQuality(item *item.Item) {
 		if item.GetQuality() < 50 {
 			item.IncrementQuality()
 		}
-		item.SellIn = item.SellIn - 1
+		item.DecrementSellIn()
 
-		if item.SellIn < 0 {
+		if item.GetSellIn() < 0 {
 			if item.GetQuality() < 50 {
 				item.IncrementQuality()
 			}
@@ -41,21 +41,21 @@ func (g GildedRose) doUpdateQuality(item *item.Item) {
 	case BackstagePasses:
 		if item.GetQuality() < 50 {
 			item.IncrementQuality()
-			if item.SellIn < 11 {
+			if item.GetSellIn() < 11 {
 				if item.GetQuality() < 50 {
 					item.IncrementQuality()
 				}
 			}
-			if item.SellIn < 6 {
+			if item.GetSellIn() < 6 {
 				if item.GetQuality() < 50 {
 					item.IncrementQuality()
 				}
 			}
 		}
 
-		item.SellIn = item.SellIn - 1
+		item.DecrementSellIn()
 
-		if item.SellIn < 0 {
+		if item.GetSellIn() < 0 {
 			item.ZeroQuality()
 		}
 	case Sulfuras:
@@ -65,9 +65,9 @@ func (g GildedRose) doUpdateQuality(item *item.Item) {
 			item.DecrementQuality()
 		}
 
-		item.SellIn = item.SellIn - 1
+		item.DecrementSellIn()
 
-		if item.SellIn < 0 {
+		if item.GetSellIn() < 0 {
 			if item.GetQuality() > 0 {
 				item.DecrementQuality()
 			}
