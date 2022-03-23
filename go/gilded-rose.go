@@ -31,7 +31,8 @@ func UpdateQuality(items []*Item) {
 }
 
 func doUpdateQuality(item *Item) {
-	if item.name == AgedBrie {
+	switch item.name {
+	case AgedBrie:
 		if item.lowQuality() {
 			item.quality = item.quality + 1
 		}
@@ -42,44 +43,38 @@ func doUpdateQuality(item *Item) {
 				item.quality = item.quality + 1
 			}
 		}
-	} else {
-		if item.name == BackstagePasses {
-			if item.lowQuality() {
-				item.quality = item.quality + 1
-				if item.sellIn < 11 {
-					if item.lowQuality() {
-						item.quality = item.quality + 1
-					}
-				}
-				if item.sellIn < 6 {
-					if item.lowQuality() {
-						item.quality = item.quality + 1
-					}
+	case BackstagePasses:
+		if item.lowQuality() {
+			item.quality = item.quality + 1
+			if item.sellIn < 11 {
+				if item.lowQuality() {
+					item.quality = item.quality + 1
 				}
 			}
-
-			item.sellIn = item.sellIn - 1
-
-			if item.sellIn < 0 {
-				item.quality = 0
+			if item.sellIn < 6 {
+				if item.lowQuality() {
+					item.quality = item.quality + 1
+				}
 			}
-		} else {
+		}
+
+		item.sellIn = item.sellIn - 1
+
+		if item.sellIn < 0 {
+			item.quality = 0
+		}
+	case Sulfulars:
+		break
+	default:
+		if item.highQuality() {
+			item.quality = item.quality - 1
+		}
+
+		item.sellIn = item.sellIn - 1
+
+		if item.sellIn < 0 {
 			if item.highQuality() {
-				if item.name != Sulfulars {
-					item.quality = item.quality - 1
-				}
-			}
-
-			if item.name != Sulfulars {
-				item.sellIn = item.sellIn - 1
-			}
-
-			if item.sellIn < 0 {
-				if item.highQuality() {
-					if item.name != Sulfulars {
-						item.quality = item.quality - 1
-					}
-				}
+				item.quality = item.quality - 1
 			}
 		}
 	}
