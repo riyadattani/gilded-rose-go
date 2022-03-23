@@ -11,8 +11,20 @@ func NewItem(name string, sellIn int, quality int) *Item {
 	return &Item{Name: name, SellIn: sellIn, Quality: quality}
 }
 
-func (i Item) GetQuality() int {
+func (i *Item) GetQuality() int {
 	return i.Quality
+}
+
+func (i *Item) IncrementQuality() {
+	i.Quality++
+}
+
+func (i *Item) DecrementQuality() {
+	i.Quality--
+}
+
+func (i *Item) ZeroQuality() {
+	i.Quality = 0
 }
 
 type Items []*Item
