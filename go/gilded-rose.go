@@ -1,7 +1,11 @@
 package main
 
+import (
+	"github.com/riyadattani/item"
+)
+
 type GildedRose struct {
-	items Items
+	items item.Items
 }
 
 const (
@@ -10,7 +14,7 @@ const (
 	Sulfuras        = "Sulfuras, Hand of Ragnaros"
 )
 
-func NewGildedRose(items Items) *GildedRose {
+func NewGildedRose(items item.Items) *GildedRose {
 	return &GildedRose{items: items}
 }
 
@@ -21,51 +25,51 @@ func (g GildedRose) UpdateQuality() {
 	}
 }
 
-func (g GildedRose) doUpdateQuality(item *Item) {
-	switch item.name {
+func (g GildedRose) doUpdateQuality(item *item.Item) {
+	switch item.Name {
 	case AgedBrie:
-		if item.quality < 50 {
-			item.quality = item.quality + 1
+		if item.Quality < 50 {
+			item.Quality = item.Quality + 1
 		}
-		item.sellIn = item.sellIn - 1
+		item.SellIn = item.SellIn - 1
 
-		if item.sellIn < 0 {
-			if item.quality < 50 {
-				item.quality = item.quality + 1
+		if item.SellIn < 0 {
+			if item.Quality < 50 {
+				item.Quality = item.Quality + 1
 			}
 		}
 	case BackstagePasses:
-		if item.quality < 50 {
-			item.quality = item.quality + 1
-			if item.sellIn < 11 {
-				if item.quality < 50 {
-					item.quality = item.quality + 1
+		if item.Quality < 50 {
+			item.Quality = item.Quality + 1
+			if item.SellIn < 11 {
+				if item.Quality < 50 {
+					item.Quality = item.Quality + 1
 				}
 			}
-			if item.sellIn < 6 {
-				if item.quality < 50 {
-					item.quality = item.quality + 1
+			if item.SellIn < 6 {
+				if item.Quality < 50 {
+					item.Quality = item.Quality + 1
 				}
 			}
 		}
 
-		item.sellIn = item.sellIn - 1
+		item.SellIn = item.SellIn - 1
 
-		if item.sellIn < 0 {
-			item.quality = 0
+		if item.SellIn < 0 {
+			item.Quality = 0
 		}
 	case Sulfuras:
 		break
 	default:
-		if item.quality > 0 {
-			item.quality = item.quality - 1
+		if item.Quality > 0 {
+			item.Quality = item.Quality - 1
 		}
 
-		item.sellIn = item.sellIn - 1
+		item.SellIn = item.SellIn - 1
 
-		if item.sellIn < 0 {
-			if item.quality > 0 {
-				item.quality = item.quality - 1
+		if item.SellIn < 0 {
+			if item.Quality > 0 {
+				item.Quality = item.Quality - 1
 			}
 		}
 	}

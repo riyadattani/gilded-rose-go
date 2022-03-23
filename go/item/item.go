@@ -1,14 +1,14 @@
-package main
+package item
 
 import "fmt"
 
 type Item struct {
-	name            string
-	sellIn, quality int
+	Name            string
+	SellIn, Quality int
 }
 
 func NewItem(name string, sellIn int, quality int) *Item {
-	return &Item{name: name, sellIn: sellIn, quality: quality}
+	return &Item{Name: name, SellIn: sellIn, Quality: quality}
 }
 
 type Items []*Item

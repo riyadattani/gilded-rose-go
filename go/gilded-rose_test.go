@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	approvals "github.com/approvals/go-approval-tests"
+	"github.com/riyadattani/item"
 )
 
 func Test_Foo(t *testing.T) {
@@ -12,7 +13,8 @@ func Test_Foo(t *testing.T) {
 	quality := []int{0, 1, 49, 50, -1}
 
 	approvals.VerifyAllCombinationsFor3(t, "update quality", func(name, sellin, quality interface{}) string {
-		items := Items{&Item{name.(string), sellin.(int), quality.(int)}}
+		it := item.NewItem(name.(string), sellin.(int), quality.(int))
+		items := item.Items{it}
 
 		rose := NewGildedRose(items)
 		rose.UpdateQuality()
