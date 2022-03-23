@@ -25,7 +25,25 @@ const (
 
 func UpdateQuality(items []*Item) {
 	for _, item := range items {
-		if item.name != AgedBrie && item.name != BackstagePasses {
+		doUpdateQuality(item)
+
+	}
+}
+
+func doUpdateQuality(item *Item) {
+	if item.name == AgedBrie {
+		if item.lowQuality() {
+			item.quality = item.quality + 1
+		}
+		item.sellIn = item.sellIn - 1
+
+		if item.sellIn < 0 {
+			if item.lowQuality() {
+				item.quality = item.quality + 1
+			}
+		}
+	} else {
+		if item.name != BackstagePasses {
 			if item.highQuality() {
 				if item.name != Sulfulars {
 					item.quality = item.quality - 1
@@ -34,16 +52,14 @@ func UpdateQuality(items []*Item) {
 		} else {
 			if item.lowQuality() {
 				item.quality = item.quality + 1
-				if item.name == BackstagePasses {
-					if item.sellIn < 11 {
-						if item.lowQuality() {
-							item.quality = item.quality + 1
-						}
+				if item.sellIn < 11 {
+					if item.lowQuality() {
+						item.quality = item.quality + 1
 					}
-					if item.sellIn < 6 {
-						if item.lowQuality() {
-							item.quality = item.quality + 1
-						}
+				}
+				if item.sellIn < 6 {
+					if item.lowQuality() {
+						item.quality = item.quality + 1
 					}
 				}
 			}
@@ -54,23 +70,16 @@ func UpdateQuality(items []*Item) {
 		}
 
 		if item.sellIn < 0 {
-			if item.name != AgedBrie {
-				if item.name != BackstagePasses {
-					if item.highQuality() {
-						if item.name != Sulfulars {
-							item.quality = item.quality - 1
-						}
+			if item.name != BackstagePasses {
+				if item.highQuality() {
+					if item.name != Sulfulars {
+						item.quality = item.quality - 1
 					}
-				} else {
-					item.quality = item.quality - item.quality
 				}
 			} else {
-				if item.lowQuality() {
-					item.quality = item.quality + 1
-				}
+				item.quality = 0
 			}
 		}
-
 	}
 }
 
