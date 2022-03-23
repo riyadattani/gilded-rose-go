@@ -26,7 +26,7 @@ func (g GildedRose) UpdateQuality() {
 }
 
 func (g GildedRose) doUpdateQuality(item *item.Item) {
-	switch item.Name {
+	switch item.GetName() {
 	case AgedBrie:
 		if item.GetQuality() < 50 {
 			item.IncrementQuality()

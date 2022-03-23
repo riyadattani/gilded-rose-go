@@ -3,12 +3,12 @@ package item
 import "fmt"
 
 type Item struct {
-	Name            string
+	name            string
 	sellIn, quality int
 }
 
 func NewItem(name string, sellIn int, quality int) *Item {
-	return &Item{Name: name, sellIn: sellIn, quality: quality}
+	return &Item{name: name, sellIn: sellIn, quality: quality}
 }
 
 func (i *Item) GetQuality() int {
@@ -33,6 +33,10 @@ func (i *Item) DecrementSellIn() {
 
 func (i *Item) GetSellIn() int {
 	return i.sellIn
+}
+
+func (i *Item) GetName() string {
+	return i.name
 }
 
 type Items []*Item
