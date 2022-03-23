@@ -40,7 +40,7 @@ func (g GildedRose) doUpdateQuality(item *item.Item) {
 		}
 	case BackstagePasses:
 		if item.GetQuality() < 50 {
-			item.Quality = item.Quality + 1
+			item.IncrementQuality()
 			if item.SellIn < 11 {
 				if item.GetQuality() < 50 {
 					item.IncrementQuality()
